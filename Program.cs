@@ -13,10 +13,66 @@
 
     private static void Main(string [ ] args)
         {
-        Console.WriteLine("Hello, World! Ater!");
-           //Menu  Addition , Subtraction , Multiplication , Division ,Previous game
+
+        //Menu  Addition , Subtraction , Multiplication , Division ,Previous game
         //User can select operator using switch statements
         //Prompt the user to give an answer?
+        //Exit menu
+
+        int selection ;
         
+        //Print menu for user
+        Console.WriteLine("          Math Game App           ");
+        Console.WriteLine("**************MENU**********************");
+       
+        Console.WriteLine("1. Addition");
+        Console.WriteLine("2. Subtraction");
+        Console.WriteLine("3. Multiplication");
+        Console.WriteLine("4. Division");
+        Console.WriteLine("5. View Previous Game ");
+        Console.WriteLine("6. Exit Game : ");
+        Console.Write("Select a number from the menu : ");
+      
+        selection = int.Parse(Console.ReadLine());
+        //Perform selections using switch statements
+
+        switch (selection){
+
+        case 1:
+            int num1 = 4;
+            int num2 = 5;
+            int ans;
+            Console.WriteLine("Addition Game");
+            Console.Write("{0} + {1} = ? ", num1, num2);
+            ans = int.Parse(Console.ReadLine());
+
+            if (ans == 9 )
+                {
+                Console.WriteLine("Answer is Correct!");
+                }
+              else
+                {
+                Console.WriteLine("Answer is Wrong!");
+                }
+            
+            
+            break;
+        case 2:
+            Console.WriteLine("Subtraction Game");
+            break;
+        case 3:
+            Console.WriteLine("Multiplication Game");
+            break;
+        case 4:
+            Console.WriteLine("Division Game");
+            break;
+        case 5:
+            Console.WriteLine("Previous Game");
+            break;
+        default:
+            Console.WriteLine("Exit");
+            break;
+            }
+
         }
     }
