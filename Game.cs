@@ -1,4 +1,6 @@
-﻿internal class Game
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+internal class Game
     {
 
     /*
@@ -11,9 +13,37 @@
 
         */
 
-   public int Add(int a, int b) 
+    //Method to display Menu
+    public void Menu()
+        {
+        //Print menu for user
+        Console.WriteLine("          Math Game App           ");
+        Console.WriteLine("**************MENU**********************");
+        string Game1 = "1. Addition";
+
+        string Game2 = "2. Subtraction";
+        string Game3 = "3. Multiplication";
+        string Game4 = "4. Division";
+        string menu1 = "5. View Previous Game ";
+        string menu2 = "6. Exit Game : ";
+
+        Console.WriteLine(Game1); //Menu will be as functions so that user can call them in any screen
+        Console.WriteLine(Game2);
+        Console.WriteLine(Game3);
+        Console.WriteLine(Game4);
+        Console.WriteLine(menu1);
+        Console.WriteLine(menu2);
+       
+
+        }
+
+    //Selections 
+
+    //Operations
+    public int Add(int a, int b)
         {
         return a + b;
+        //Math operations go here
         }
 
     public int Subtract(int a, int b)
@@ -21,55 +51,69 @@
         return a - b;
         }
 
+    //Random Number
 
-
-        private static void Main(string [ ] args)
+    public int FirstRandonNumber(int startRange , int endRange)
         {
+        //Random numbers picked for the operators
+        Random randomNumber = new Random();
+        int firstNum = randomNumber.Next(startRange, endRange);
 
-        //Menu  Addition , Subtraction , Multiplication , Division ,Previous game
-        //User can select operator using switch statements
-        //Prompt the user to give an answer?
-        //Exit menu
+        return firstNum;
+        }
 
-        int selection ;
-        
-        //Print menu for user
-        Console.WriteLine("          Math Game App           ");
-        Console.WriteLine("**************MENU**********************");
-        //List Games = [ Addition, Subtraction, Multiplication, Division ];
+    public int SecondRandonNumber(int startRange, int endRange)
+        {
+        //Random numbers picked for the operators
+        Random randomNumber = new Random();
+        int secondNum = randomNumber.Next(startRange, endRange);
 
-        Console.WriteLine("1. Addition"  ) ;
-        Console.WriteLine("2. Subtraction");
-        Console.WriteLine("3. Multiplication");
-        Console.WriteLine("4. Division");
-        Console.WriteLine("5. View Previous Game ");
-        Console.WriteLine("6. Exit Game : ");
-        Console.Write("Select a number from the menu : ");
-      
+        return secondNum;
+        }
+
+        //Method for selection
+        public void SelectGame()
+        {
+        int selection;
+
         //This should be looped to continue selecting a new operations
-        selection = int.Parse(Console.ReadLine());
-        
+        Console.Write("Select a number from the menu : ");
+        selection = int.Parse(Console.ReadLine());  // ----> This should be a return from the method so that it can be added to method for previous
+
         //Perform selections using switch statements
 
-        switch (selection){ //this should be looped to continue asking user to perform a specific operation
+        switch ( selection )
+            { //this should be looped to continue asking user to perform a specific operation
 
         case 1:
             string cont;
             do
-            {
+                {
+
                 Console.WriteLine("Addition Game");
                 //Random numbers picked for the operators
-                Random randomNumber = new Random();
-                int var1 = randomNumber.Next(1, 21);
-                int var2 = randomNumber.Next(1, 21);
-                Game addition = new Game();
-                int answerKey = addition.Add(var1, var2);
-
                 
+                Game addition = new Game();
 
-                Console.Write(var1 + " + " + var2 + " = ");
+                 int firstNumber =  addition.FirstRandonNumber(1,21);
+                 int secondNumber = addition.SecondRandonNumber(1, 21);
+
+                 int answerKey = addition.Add(firstNumber, secondNumber );
+
+                Console.Write(firstNumber + " + " + secondNumber + " = ");
 
                 int ans = int.Parse(Console.ReadLine());
+
+                
+                //This should be a called method so that it can be used everywhere
+                string strNumber1 = firstNumber.ToString();
+                string strNumber2 = secondNumber.ToString();
+                string strAnswer = ans.ToString();
+
+                string Prev = strNumber1 + " " + " + " + strNumber2 + " " + " = " + strAnswer;
+                //string previous = "Previous Game : {0} + {1} = {2}",firstNumber, secondNumber, ans ); // this will be a function that can be called
+
+                //switch into if 1 is selected then currentGame = that
 
                 if ( ans == answerKey )
                     {
@@ -79,35 +123,19 @@
                     {
                     Console.WriteLine("Answer is Wrong!");
                     }
-                Console.Write("Contine Game (Y/N) :");
-                 cont = Console.ReadLine();
-                
+                Console.WriteLine("The previous game is {0} --> {1}", selection, Prev); //call the method to reveal previous game.so that user can call them in any screen
+                Console.Write("Contine Game (Y/N) or (0/1) to return to menu:");
 
-            } while(cont == "Y" || cont =="y");
-            
+                cont = Console.ReadLine();
+
+
+
+                } while ( cont == "Y" || cont =="y" );
+
             break;
         case 2:
-            
-            int sub1 = 5;
-            int sub2 = 4;
-            int res;
             Console.WriteLine("Subtraction Game");
 
-            //create a method for operation. So that we can save it somewhere and call it as previous
-            Console.Write("{0} - {1} = ? ", sub1, sub2);
-           res = int.Parse(Console.ReadLine());
-
-            if ( res == 1 )
-                {
-                Console.WriteLine("Answer is Correct!");
-                }
-            else
-                {
-                Console.WriteLine("Answer is Wrong!");
-                }
-
-        
-            Console.WriteLine(res);
             break;
         case 3:
             Console.WriteLine("Multiplication Game");
@@ -126,6 +154,28 @@
             Console.WriteLine("Exit");
             break;
             }
+
+        }
+
+   public void PreviousGame()
+        {
+        Game previous = new Game();
+        previous.SelectGame();
+        
+        }
+
+
+    private static void Main(string [ ] args)
+        {
+
+        //Menu  Addition , Subtraction , Multiplication , Division ,Previous game
+        //User can select operator using switch statements
+        //Prompt the user to give an answer?
+        //Exit menu
+        Game game = new Game();
+        game.Menu(); //Print Menu
+        game.SelectGame(); //Select Game to play
+        game.PreviousGame();
 
         }
     }
