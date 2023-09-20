@@ -25,15 +25,15 @@ internal class Game
         string Game3 = "3. Multiplication";
         string Game4 = "4. Division";
         string menu1 = "5. View Previous Game ";
-        string menu2 = "6. Exit Game : ";
-
+        string menu2 = "6. Main Menu : ";
+        string menu3 = "7. Exit : ";
         Console.WriteLine(Game1); //Menu will be as functions so that user can call them in any screen
         Console.WriteLine(Game2);
         Console.WriteLine(Game3);
         Console.WriteLine(Game4);
         Console.WriteLine(menu1);
         Console.WriteLine(menu2);
-       
+        Console.WriteLine(menu3);
 
         }
 
@@ -45,15 +45,24 @@ internal class Game
         return a + b;
         //Math operations go here
         }
-
+    public int Mult(int a, int b)
+        {
+        return a * b;
+        //Math operations go here
+        }
+    public int Div(int a, int b)
+        {
+        return a / b;
+        //Math operations go here
+        }
     public int Subtract(int a, int b)
         {
         return a - b;
         }
 
-    //Random Number
+        //Random Number
 
-    public int FirstRandonNumber(int startRange , int endRange)
+        public int FirstRandonNumber(int startRange , int endRange)
         {
         //Random numbers picked for the operators
         Random randomNumber = new Random();
@@ -83,37 +92,75 @@ internal class Game
         //Perform selections using switch statements
 
         switch ( selection )
-            { //this should be looped to continue asking user to perform a specific operation
+            { 
 
         case 1:
             string cont;
+            string menu;
             do
-                {
+             {
 
                 Console.WriteLine("Addition Game");
                 //Random numbers picked for the operators
-                
                 Game addition = new Game();
-
-                 int firstNumber =  addition.FirstRandonNumber(1,21);
-                 int secondNumber = addition.SecondRandonNumber(1, 21);
-
-                 int answerKey = addition.Add(firstNumber, secondNumber );
-
+                int firstNumber =  addition.FirstRandonNumber(1,21);
+                int secondNumber = addition.SecondRandonNumber(1, 21);
+                int answerKey = addition.Add(firstNumber, secondNumber );
                 Console.Write(firstNumber + " + " + secondNumber + " = ");
-
                 int ans = int.Parse(Console.ReadLine());
 
-                
-                //This should be a called method so that it can be used everywhere
+               //This should be a called method so that it can be used everywhere
                 string strNumber1 = firstNumber.ToString();
                 string strNumber2 = secondNumber.ToString();
                 string strAnswer = ans.ToString();
 
                 string Prev = strNumber1 + " " + " + " + strNumber2 + " " + " = " + strAnswer;
-                //string previous = "Previous Game : {0} + {1} = {2}",firstNumber, secondNumber, ans ); // this will be a function that can be called
+               
+                if ( ans == answerKey )
+                    {
+                    Console.WriteLine("Answer is Correct!");
+                    }
+                else
+                    {
+                    Console.WriteLine("Answer is Wrong!");
+                    }
+                Console.WriteLine("The previous game is {0} --> {1}", selection, Prev); //call the method to reveal previous game.so that user can call them in any screen
+                
+                Console.Write("Contine Game (Y/N) or (0/1) to return to menu:");
+            
+               
 
-                //switch into if 1 is selected then currentGame = that
+                cont = Console.ReadLine();
+                if ( cont == "1" )
+                    {
+                    Menu();
+                    SelectGame();
+                    }
+                } while ( cont == "Y" || cont =="y" );
+
+            break;
+        case 2:
+            
+            do
+                {
+
+                Console.WriteLine("Subtraction Game");
+
+                //call subtraction
+                //Game subtraction = new Game();
+                
+                int firstNumber = FirstRandonNumber(1, 21);
+                int secondNumber = SecondRandonNumber(1, 21);
+                int answerKey = Subtract(firstNumber, secondNumber);
+                Console.Write(firstNumber + " - " + secondNumber + " = ");
+                int ans = int.Parse(Console.ReadLine());
+               
+
+                //This should be a called method so that it can be used everywhere
+                string strNumber1 = firstNumber.ToString();
+                string strNumber2 = secondNumber.ToString();
+                string strAnswer = ans.ToString();
+                string Prev = strNumber1 + " " + " - " + strNumber2 + " " + " = " + strAnswer;
 
                 if ( ans == answerKey )
                     {
@@ -125,29 +172,113 @@ internal class Game
                     }
                 Console.WriteLine("The previous game is {0} --> {1}", selection, Prev); //call the method to reveal previous game.so that user can call them in any screen
                 Console.Write("Contine Game (Y/N) or (0/1) to return to menu:");
+                menu = Console.ReadLine();
+                if ( menu == "1" )
+                    {
+                    Menu();
+                    SelectGame();
+                    }
 
                 cont = Console.ReadLine();
-
-
-
                 } while ( cont == "Y" || cont =="y" );
 
             break;
-        case 2:
-            Console.WriteLine("Subtraction Game");
-
-            break;
         case 3:
-            Console.WriteLine("Multiplication Game");
+            do
+                {
+
+                Console.WriteLine("Multiplication Game");
+                //Random numbers picked for the operators
+                Game multiply = new Game();
+                int firstNumber = multiply.FirstRandonNumber(1, 21);
+                int secondNumber = multiply.SecondRandonNumber(1, 21);
+                int answerKey = multiply.Mult(firstNumber, secondNumber);
+                Console.Write(firstNumber + " * " + secondNumber + " = ");
+                int ans = int.Parse(Console.ReadLine());
+
+                //This should be a called method so that it can be used everywhere
+                string strNumber1 = firstNumber.ToString();
+                string strNumber2 = secondNumber.ToString();
+                string strAnswer = ans.ToString();
+
+                string Prev = strNumber1 + " " + " * " + strNumber2 + " " + " = " + strAnswer;
+
+                if ( ans == answerKey )
+                    {
+                    Console.WriteLine("Answer is Correct!");
+                    }
+                else
+                    {
+                    Console.WriteLine("Answer is Wrong!");
+                    }
+                Console.WriteLine("The previous game is {0} --> {1}", selection, Prev); //call the method to reveal previous game.so that user can call them in any screen
+                Console.Write("Contine Game (Y/N) or (0/1) to return to menu:");
+                menu = Console.ReadLine();
+                if ( menu == "1" )
+                    {
+                    Menu();
+                    }
+
+                cont = Console.ReadLine();
+                } while ( cont == "Y" || cont =="y" );
             break;
         case 4:
-            Console.WriteLine("Division Game");
+            do
+                {
+
+                Console.WriteLine("Division Game");
+                //Random numbers picked for the operators
+                Game division= new Game();
+                int firstNumber = division.FirstRandonNumber(1, 21);
+                int secondNumber = division.SecondRandonNumber(1, 21);
+                int answerKey = division.Div(firstNumber, secondNumber);
+                Console.Write(firstNumber + " / " + secondNumber + " = ");
+                int ans = int.Parse(Console.ReadLine());
+
+                //This should be a called method so that it can be used everywhere
+                string strNumber1 = firstNumber.ToString();
+                string strNumber2 = secondNumber.ToString();
+                string strAnswer = ans.ToString();
+
+                string Prev = strNumber1 + " " + " / " + strNumber2 + " " + " = " + strAnswer;
+
+                if ( ans == answerKey )
+                    {
+                    Console.WriteLine("Answer is Correct!");
+                    }
+                else
+                    {
+                    Console.WriteLine("Answer is Wrong!");
+                    }
+                Console.WriteLine("The previous game is {0} --> {1}", selection, Prev); //call the method to reveal previous game.so that user can call them in any screen
+                Console.Write("Contine Game (Y/N) or (0/1) to return to menu:");
+                
+                menu = Console.ReadLine();
+                if ( menu == "1" )
+                    {
+                    Menu();
+                    }
+
+                cont = Console.ReadLine();
+                } while ( cont == "Y" || cont =="y" );
             break;
+
         case 5:
             Console.WriteLine("Previous Game");
+
             Console.ReadLine();
 
 
+
+            break;
+        case 6:
+            Console.WriteLine("Main Menu");
+            menu = Console.ReadLine();
+            if ( menu == "1" )
+                {
+                Menu();
+                SelectGame();
+                }
 
             break;
         default:
@@ -157,12 +288,7 @@ internal class Game
 
         }
 
-   public void PreviousGame()
-        {
-        Game previous = new Game();
-        previous.SelectGame();
-        
-        }
+  
 
 
     private static void Main(string [ ] args)
@@ -175,7 +301,7 @@ internal class Game
         Game game = new Game();
         game.Menu(); //Print Menu
         game.SelectGame(); //Select Game to play
-        game.PreviousGame();
+        //game.PreviousGame();
 
         }
     }
