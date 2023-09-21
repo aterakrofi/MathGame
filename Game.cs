@@ -4,8 +4,75 @@ using System.Linq;
 namespace MathGame
 {
 
-    public class Program
+    public class Games
     {
+        public int PrintMenu()
+            {
+                Console.Write("Hard - 3   ||");
+                Console.Write("Medium - 2   ||");
+                Console.WriteLine("Easy - 1 ");
+                Console.Write("Select the game level :");
+            int choice = int.Parse(Console.ReadLine());
+            return choice;
+        }
+
+        public int UserInput()
+        {
+
+            return int.Parse(Console.ReadLine());
+        }
+
+
+        Random random = new Random();
+       
+        public int FirstRandom()
+        {
+            int firstNumber = 0;
+           
+            Games newLevel = new Games();
+            int levelSelection = newLevel.PrintMenu();
+
+            switch (levelSelection)
+            {
+                case 1:  //easy
+                    firstNumber = random.Next(1, 11);
+                    break;
+                case 2: //medium
+                    firstNumber = random.Next(11, 21);
+                    break;
+                case 3: //Hard 
+                    firstNumber = random.Next(21, 101);
+                    break;
+            }
+            return firstNumber;
+        }
+        public int SecondRandom()
+        {
+            
+            int secondNumber = 0;
+            Games newLevel = new Games();
+            int levelSelection = newLevel.PrintMenu();
+
+            switch (levelSelection)
+            {
+                case 1:  //easy
+                    secondNumber = random.Next(1, 11);
+                    break;
+                case 2: //medium
+                    secondNumber = random.Next(11, 21);
+                    break;
+                case 3: //Hard 
+                    secondNumber = random.Next(21, 101);
+                    break;
+            }
+            return secondNumber;
+        }
+
+         
+   
+        
+
+
         static void Main(string[] args)
         {
             /*
@@ -14,6 +81,11 @@ namespace MathGame
 3. Users should be presented with a menu to choose an operation
 4.You should record previous games in a List and there should be an option in the menu for the user to visualize a history of previous games.
 5. You don't need to record results on a database. Once the program is closed the results will be deleted.
+
+ 1. Try to implement levels of difficulty.
+ 2. Add a timer to track how long the user takes to finish the game.
+ 3. Add a function that let's the user pick the number of questions.
+ 4. Create a 'Random Game' option where the players will be presented with questions from random operations
 
 
       */
@@ -49,11 +121,19 @@ namespace MathGame
                     case 1:
                         do
                         {
-                            firstNumber = rand.Next(1, 21);
-                            secondNumber = rand.Next(1, 21);
+                            
                             gameName = "Addition Game";
                             Console.WriteLine(gameName);
+                            Games level= new Games();
+                            //level.PrintMenu();
+
+                           //Logic to decide difficulty
+                            firstNumber = level.FirstRandom();//
+                            secondNumber = level.SecondRandom();
+
                             Console.Write("{0} + {1} = ", firstNumber, secondNumber);
+
+
                             userAnswer = int.Parse(Console.ReadLine());
                             calculatedAnswer = firstNumber + secondNumber;
                             if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct"); }
