@@ -22,29 +22,28 @@ namespace MathGame
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
             Console.WriteLine("4. Division");
-            Console.WriteLine("5. Previous Game");
+            Console.WriteLine("5. Previous Game History");
             Console.WriteLine("6. Exit Game");
-
+            //Variable declarations
             int selection;
-            Random rand = new Random();
             int firstNumber;
             int secondNumber;
-            int multiplier;
             string playOn;
             string gameName;
             string tracker;
-
             int calculatedAnswer;
             int userAnswer;
+            //Create list to store game history
             var previousGame = new List<string>();
-
+            //Generate random numbers
+            Random rand = new Random();
             do
             {
 
                 Console.Write("Select a number on the Menu :");
                 selection = int.Parse(Console.ReadLine());
 
-                //Selections
+                //Selections from Menu
                 switch (selection)
                 {
                     case 1:
@@ -108,25 +107,20 @@ namespace MathGame
                     case 4:
                         do
                         {
-
-                            int divisor = rand.Next(1, 101);  
-                            multiplier = rand.Next(1, 11);
-                            int dividend;
-                            int calc = divisor * multiplier;
-
-                            if (calc > 100)
+                            firstNumber = rand.Next(1, 101);
+                            secondNumber = rand.Next(1, 11);
+                            while (firstNumber % secondNumber != 0)
                             {
-                                dividend = calc / 10;
+                                secondNumber = rand.Next(1, 11);
                             }
-                            else {dividend = divisor * multiplier; }
-                                gameName = "Division Game";
+                            gameName = "Division Game";
                             Console.WriteLine(gameName);
-                            Console.Write("{1} / {0} = ", divisor, dividend);
+                            Console.Write("{0} / {1} = ", firstNumber, secondNumber);
                             userAnswer = int.Parse(Console.ReadLine());
-                            calculatedAnswer = dividend / divisor;
+                            calculatedAnswer = firstNumber / secondNumber;
                             if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct"); }
                             else { Console.WriteLine("Answer is Wrong"); }
-                            tracker = gameName + " " + dividend + " " + " / " + divisor + " = " + " " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
+                            tracker = gameName + " " + firstNumber + " " + " / " + secondNumber + " = " + " " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
                             previousGame.Add(tracker);
                             Console.Write("Continue (Y/N) ");
                             playOn = Console.ReadLine();
@@ -134,7 +128,7 @@ namespace MathGame
                         break;
 
                     case 5:
-                        Console.WriteLine("Previous Game selected");
+                        Console.WriteLine("Previous Game History");
                         for (int i = 0; i < previousGame.Count; i++) { Console.WriteLine(previousGame[i]); }
                         break;
                 }
