@@ -6,14 +6,13 @@ namespace MathGame
 
     public class Games
     {
-        public int PrintMenu()
-            {
-                Console.Write("Hard - 3   ||");
-                Console.Write("Medium - 2   ||");
-                Console.WriteLine("Easy - 1 ");
-                Console.Write("Select the game level :");
-            int choice = int.Parse(Console.ReadLine());
-            return choice;
+
+        public void PrintMenu()
+        {
+            Console.Write("Hard - 3   ||");
+            Console.Write("Medium - 2   ||");
+            Console.WriteLine("Easy - 1 ");
+
         }
 
         public int UserInput()
@@ -23,16 +22,11 @@ namespace MathGame
         }
 
 
-        Random random = new Random();
-       
-        public int FirstRandom()
+        public int firstRandom(int choice)
         {
+            Random random = new Random();
             int firstNumber = 0;
-           
-            Games newLevel = new Games();
-            int levelSelection = newLevel.PrintMenu();
-
-            switch (levelSelection)
+            switch (choice)
             {
                 case 1:  //easy
                     firstNumber = random.Next(1, 11);
@@ -46,14 +40,12 @@ namespace MathGame
             }
             return firstNumber;
         }
-        public int SecondRandom()
-        {
-            
-            int secondNumber = 0;
-            Games newLevel = new Games();
-            int levelSelection = newLevel.PrintMenu();
 
-            switch (levelSelection)
+        public int secondRandom(int choice)
+        {
+            Random random = new Random();
+            int secondNumber = 0;
+            switch (choice)
             {
                 case 1:  //easy
                     secondNumber = random.Next(1, 11);
@@ -68,11 +60,23 @@ namespace MathGame
             return secondNumber;
         }
 
-         
-   
-        
+        public long Timer()
+        {
+
+            //code excutes here
+
+            return Timer();
 
 
+        }
+
+        public void ValidateAnswer(int userAnswer, int calculatedAnswer, int firstNumber, int secondNumber)
+        {
+
+
+
+
+        }
         static void Main(string[] args)
         {
             /*
@@ -121,25 +125,36 @@ namespace MathGame
                     case 1:
                         do
                         {
-                            
+
                             gameName = "Addition Game";
                             Console.WriteLine(gameName);
-                            Games level= new Games();
-                            //level.PrintMenu();
+                            Games level = new Games();
+                            level.PrintMenu();
+                            Console.Write("Select the game level :");
+                            int userChoice = int.Parse(Console.ReadLine());
 
-                           //Logic to decide difficulty
-                            firstNumber = level.FirstRandom();//
-                            secondNumber = level.SecondRandom();
+                            //Logic to decide difficulty
+                            firstNumber = level.firstRandom(userChoice);//
+                            secondNumber = level.secondRandom(userChoice);
 
                             Console.Write("{0} + {1} = ", firstNumber, secondNumber);
 
+                            //calculate time spent on question
+                            var timer = System.Diagnostics.Stopwatch.StartNew();
 
                             userAnswer = int.Parse(Console.ReadLine());
+
+                            var timeSpent = timer.ElapsedMilliseconds;
+
+
                             calculatedAnswer = firstNumber + secondNumber;
-                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct"); }
-                            else { Console.WriteLine("Answer is Wrong"); }
+                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct timespent {0} Ms on this game", timeSpent); }
+                            else { Console.WriteLine("Answer is Wrong . You spent timespent {0} Ms on this game", timeSpent); }
+
                             tracker = gameName + " " + firstNumber + " " + "+" + " " + secondNumber + "  =  " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
                             previousGame.Add(tracker);
+
+
                             Console.Write("Continue (Y/N) ");
                             playOn = Console.ReadLine();
                         } while (playOn == "Y" || playOn == "y");
@@ -149,15 +164,24 @@ namespace MathGame
                     case 2:
                         do
                         {
-                            firstNumber = rand.Next(1, 21);
-                            secondNumber = rand.Next(1, 21);
                             gameName = "Subtraction Game";
                             Console.WriteLine(gameName);
+                            Games level = new Games();
+                            level.PrintMenu();
+                            Console.Write("Select the game level :");
+                            int userChoice = int.Parse(Console.ReadLine());
+
+                            //Logic to decide difficulty
+                            firstNumber = level.firstRandom(userChoice);//
+                            secondNumber = level.secondRandom(userChoice);
                             Console.Write("{0} - {1} = ", firstNumber, secondNumber);
+                            //calculate time spent on question
+                            var timer = System.Diagnostics.Stopwatch.StartNew();
                             userAnswer = int.Parse(Console.ReadLine());
+                            var timeSpent = timer.ElapsedMilliseconds;
                             calculatedAnswer = firstNumber - secondNumber;
-                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct"); }
-                            else { Console.WriteLine("Answer is Wrong"); }
+                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct timespent {0} Ms on this game", timeSpent); }
+                            else { Console.WriteLine("Answer is Wrong . You spent timespent {0} Ms on this game", timeSpent); }
                             tracker = gameName + " " + firstNumber + " " + " - " + secondNumber + " = " + " " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
                             previousGame.Add(tracker);
                             Console.Write("Continue (Y/N) ");
@@ -168,15 +192,23 @@ namespace MathGame
                     case 3:
                         do
                         {
-                            firstNumber = rand.Next(1, 11);
-                            secondNumber = rand.Next(1, 11);
                             gameName = "Multiplication Game";
                             Console.WriteLine(gameName);
+                            Games level = new Games();
+                            level.PrintMenu();
+                            Console.Write("Select the game level :");
+                            //calculate time spent on question
+                            var timer = System.Diagnostics.Stopwatch.StartNew();
+                            int userChoice = int.Parse(Console.ReadLine());
+                            var timeSpent = timer.ElapsedMilliseconds;
+                            //Logic to decide difficulty
+                            firstNumber = level.firstRandom(userChoice);//
+                            secondNumber = level.secondRandom(userChoice);
                             Console.Write("{0} * {1} = ", firstNumber, secondNumber);
                             userAnswer = int.Parse(Console.ReadLine());
                             calculatedAnswer = firstNumber * secondNumber;
-                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct"); }
-                            else { Console.WriteLine("Answer is Wrong"); }
+                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct timespent {0} Ms on this game", timeSpent); }
+                            else { Console.WriteLine("Answer is Wrong . You spent timespent {0} Ms on this game", timeSpent); }
                             tracker = gameName + " " + firstNumber + " " + " * " + secondNumber + " = " + " " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
                             previousGame.Add(tracker);
                             Console.Write("Continue (Y/N) ");
@@ -187,19 +219,49 @@ namespace MathGame
                     case 4:
                         do
                         {
-                            firstNumber = rand.Next(1, 101);
-                            secondNumber = rand.Next(1, 11);
-                            while (firstNumber % secondNumber != 0)
-                            {
-                                secondNumber = rand.Next(1, 11);
-                            }
+                            // firstNumber = rand.Next(1, 101);
+                            // secondNumber = rand.Next(1, 11);
+
                             gameName = "Division Game";
                             Console.WriteLine(gameName);
+                            Games level = new Games();
+                            level.PrintMenu();
+                            Console.Write("Select the game level :");
+                            int userChoice = int.Parse(Console.ReadLine());
+
+                            //Logic to decide difficulty
+                            firstNumber = level.firstRandom(userChoice);//
+                            secondNumber = level.secondRandom(userChoice);
+
+                            while (firstNumber % secondNumber != 0 && userChoice == 1)
+                            {
+                                secondNumber = rand.Next(1, 5);
+
+                            }
+
+                            while (firstNumber % secondNumber != 0 && userChoice == 2)
+                            {
+                                secondNumber = rand.Next(1, 15);
+
+                            }
+
+                            while (firstNumber % secondNumber != 0 && userChoice == 3)
+                            {
+                                secondNumber = rand.Next(1, 51);
+
+                            }
+
                             Console.Write("{0} / {1} = ", firstNumber, secondNumber);
+
+                            //calculate time spent on question
+                            var timer = System.Diagnostics.Stopwatch.StartNew();
                             userAnswer = int.Parse(Console.ReadLine());
+                            var timeSpent = timer.ElapsedMilliseconds;
+
                             calculatedAnswer = firstNumber / secondNumber;
-                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct"); }
-                            else { Console.WriteLine("Answer is Wrong"); }
+
+                            if (userAnswer == calculatedAnswer) { Console.WriteLine("Answer is correct timespent {0} Ms on this game", timeSpent); }
+                            else { Console.WriteLine("Answer is Wrong . You spent timespent {0} Ms on this game", timeSpent); }
                             tracker = gameName + " " + firstNumber + " " + " / " + secondNumber + " = " + " " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
                             previousGame.Add(tracker);
                             Console.Write("Continue (Y/N) ");
