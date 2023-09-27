@@ -22,15 +22,15 @@ namespace MathGame
 
 */
 
-        ////Method to print Levels of difficulty
+        //Method to print Levels of difficulty
         public void PrintMenu()
         {
-            Console.Write("Hard - 3   ||");
-            Console.Write("Medium - 2   ||");
+            Console.Write("Hard - 3   | ");
+            Console.Write("Medium - 2   | ");
             Console.WriteLine("Easy - 1 ");
         }
 
-
+        //Method to generate a random number based on a. user input b. level of difficult
         public int firstRandom(int choice)
         {
             Random random = new Random();
@@ -50,6 +50,7 @@ namespace MathGame
             return firstNumber;
         }
 
+        //Method to generate a random number based on a. user input b. level of difficult
         public int secondRandom(int choice)
         {
             Random random = new Random();
@@ -73,7 +74,6 @@ namespace MathGame
         public int Validate(string userInput)
         {
             int convertedResult;
-            //userInput = Console.ReadLine();
 
             while (!Int32.TryParse(userInput, out convertedResult))
             {
@@ -108,7 +108,6 @@ namespace MathGame
             Console.WriteLine("6. Select Random Game");
             Console.WriteLine("7. Exit Game");
 
-           
             do
             {
 
@@ -116,13 +115,10 @@ namespace MathGame
                 selection = validator.Validate(Console.ReadLine());
                 if (selection == 6) { selection = rand.Next(1, 4); }
 
-
                 //Selections from Menu
                 switch (selection)
                 {
-
                     case 1:
-                       
                         Console.Write("Number of Questions to play :  ");
                         string numberQuestions = Console.ReadLine();
                         int userinput = validator.Validate(numberQuestions);
@@ -278,7 +274,7 @@ namespace MathGame
                         break;
 
                 }
-            } while (selection != 7);
+            } while (selection != 7 );
         }
     }
 }
