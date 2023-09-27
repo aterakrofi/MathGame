@@ -88,7 +88,7 @@ namespace MathGame
         {
             //Variable declarations
             int firstNumber, secondNumber, calculatedAnswer, userAnswer, selection;
-            string playOn, gameName, tracker;
+            string gameName, tracker;
 
             //Create list to store game history
             var previousGame = new List<string>();
@@ -181,8 +181,7 @@ namespace MathGame
 
                             tracker = gameName + " " + firstNumber + " " + " - " + secondNumber + " = " + " " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
                             previousGame.Add(tracker);
-                            Console.Write("Continue (Y/N) ");
-                            playOn = Console.ReadLine();
+
                         }
                         break;
 
@@ -215,8 +214,7 @@ namespace MathGame
 
                             tracker = gameName + " " + firstNumber + " " + " * " + secondNumber + " = " + " " + userAnswer + " || correct Answer ===> " + calculatedAnswer;
                             previousGame.Add(tracker);
-                            Console.Write("Continue (Y/N) ");
-                        }
+                          }
                         break;
 
                     case 4:
